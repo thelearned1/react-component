@@ -18,11 +18,16 @@ for arg in "$@"; do
   toCreate+=( $strippedArg )
 done
 
+function scaffoldReactComponent () {
+  echo "import styles from './$1.module.css'
+const $1 = () => {} 
+export default $1" >> $2
+}
 
 for component in ${toCreate[@]}; do
   mkdir $component
   cd $component
   touch ${component}.js ${component}.module.css 'index.js'
-  echo "export * from './$component.js'" > 'index.js'
+  scaffoldReactComponent ${component} ${component}.js
   cd ../
-done 
+done
