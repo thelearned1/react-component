@@ -22,7 +22,7 @@ function scaffoldReactComponent () {
   echo "import styles from './$1.module.css'
 const $1 = () => {} 
 export default $1" >> $2
-  echo "export * from './$2'" >> index.js
+  echo "export { default as default } from './$1'" >> index.js
 }
 
 for component in ${toCreate[@]}; do
